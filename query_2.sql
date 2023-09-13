@@ -1,13 +1,17 @@
 SELECT
-  student_id,
-  subject_id,
-  AVG(mark) AS avg_mark
+  stu.name AS student_name,
+  s.name AS subject_name,
+  AVG(m.mark) AS avg_mark
 FROM
-  marks
+  marks m
+JOIN
+  students stu ON m.student_id = stu.id
+JOIN
+  subjects s ON m.subject_id = s.id
 WHERE
   subject_id = 5
 GROUP BY
-  student_id
+  stu.name, s.name
 ORDER BY
   avg_mark DESC
 LIMIT
